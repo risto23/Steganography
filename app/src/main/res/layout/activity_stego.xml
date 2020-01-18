@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_stego"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="alexparunov.steganographer.activities.stego.StegoActivity">
+
+  <android.support.v7.widget.Toolbar
+      android:id="@+id/toolbar"
+      android:minHeight="?attr/actionBarSize"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:background="?attr/colorPrimary"
+      android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+  </android.support.v7.widget.Toolbar>
+
+  <LinearLayout android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_gravity="center"
+                android:paddingTop="@dimen/activity_stego_top_padding">
+
+    <TextView
+        android:text="@string/stego_image_title"
+        android:textSize="@dimen/big_text_dim"
+        android:textColor="@color/colorPrimaryBlack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:paddingBottom="5dp"
+        android:id="@+id/textView"/>
+    <ImageView
+        android:layout_width="@dimen/stego_image_square"
+        android:layout_height="@dimen/stego_image_square"
+        app:srcCompat="@mipmap/ic_launcher"
+        android:contentDescription="@string/stego_image_title"
+        android:id="@+id/ivStegoImage"
+        android:scaleType="centerCrop"
+        android:paddingBottom="5dp"
+        android:adjustViewBounds="false"/>
+
+    <android.support.v7.widget.AppCompatButton
+        android:text="@string/b_stego_image_save"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:textColor="@color/colorPrimaryWhite"
+        app:backgroundTint="@color/colorBlueGreySecondary"
+        android:id="@+id/bStegoSave"/>
+
+    <android.support.v7.widget.AppCompatButton
+        android:text="@string/b_stego_image_share"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:textColor="@color/colorPrimaryWhite"
+        app:backgroundTint="@color/colorBlueGreySecondary"
+        android:id="@+id/bStegoShare"/>
+  </LinearLayout>
+
+</LinearLayout>
