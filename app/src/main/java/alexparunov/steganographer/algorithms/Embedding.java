@@ -61,7 +61,7 @@ public class Embedding {
     Log.i("heigth cover:",height_cover);
 
     //If secret image is too long (3 bits in each pixel + skipping)
-    if (secretImageLen > (width-2) * (height-2) * 2) {
+    if (secretImageLen > ((width * height) * 3)) {
       return null;
     }
 
@@ -108,7 +108,7 @@ public class Embedding {
 
     int endX = 2, endY = 0;
 
-    //proses password
+    //proses embed password
     outerloop:
     for (int x = 0; x < 1; x++) {
       for (int y = 2; y < 18; y++) {
@@ -125,7 +125,7 @@ public class Embedding {
 
             //Action for LSB
 
-              action = action(colors[c], password.charAt(embPass));
+              action = kunci(colors[c], password.charAt(embPass));
               colors[c] += action;
               embPass++;
               keyPos = (keyPos + 1) % key.length;
@@ -155,7 +155,11 @@ public class Embedding {
 
             //Action for LSB
             if ((key[keyPos] ^ LSB2(colors[c])) == 1) {
-              action = action(colors[c], sImageInBin.charAt(embImPos));
+              int warna = 0;
+              warna = colors[c];
+              String bin=Integer.toBinaryString(warna);
+              char terakhir=bin.charAt(bin.length() - 1);
+              action = pesan(terakhir, sImageInBin.charAt(embImPos));
               colors[c] += action;
               embImPos++;
               keyPos = (keyPos + 1) % key.length;
@@ -234,7 +238,7 @@ public class Embedding {
     Log.i("heigth cover:",height_cover);
 
     //If secret message is too long (3 bits in each pixel + skipping of some pixels)
-    if (secretMessageLen > (width-2) * (height-2) * 2) {
+    if (secretMessageLen > ((width * height) * 3)) {
       return null;
     }
 
@@ -297,7 +301,7 @@ public class Embedding {
 
             //Action for LSB
 
-              action = action(colors[c], password.charAt(embPass));
+              action = kunci(colors[c], password.charAt(embPass));
               colors[c] += action;
               embPass++;
               keyPos = (keyPos + 1) % key.length;
@@ -326,7 +330,11 @@ public class Embedding {
 
             //Action for LSB
             if ((key[keyPos] ^ LSB2(colors[c])) == 1) {
-              action = action(colors[c], sTextInBin.charAt(embMesPos));
+              int warna = 0;
+              warna = colors[c];
+              String bin=Integer.toBinaryString(warna);
+              char terakhir=bin.charAt(bin.length() - 1);
+              action = pesan(terakhir, sTextInBin.charAt(embMesPos));
               colors[c] += action;
               embMesPos++;
               keyPos = (keyPos + 1) % key.length;
@@ -388,10 +396,19 @@ public class Embedding {
    * @param bit   is bit of secret message which should be hidden
    * @return a correct integer which is used in mutation of color +1, -1, or 0
    */
-  private static int action(int color, char bit) {
+  private static int kunci(int color, char bit) {
     if (LSB(color) == 1 && bit == '0') {
       return -1;
     } else if (LSB(color) == 0 && bit == '1') {
+      return 1;
+    } else {
+      return 0;
+    }
+  }
+  private static int pesan(char color, char bit) {
+    if (color == '1' && bit == '0') {
+      return -1;
+    } else if (color == '0' && bit == '1') {
       return 1;
     } else {
       return 0;
