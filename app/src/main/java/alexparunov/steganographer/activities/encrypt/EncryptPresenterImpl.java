@@ -258,7 +258,7 @@ class EncryptPresenterImpl implements EncryptPresenter, EncryptInteractorImpl.En
   }
 
   private String storeStegoImage(Bitmap stegoImage) {
-    String path = Environment.getExternalStorageDirectory() + File.separator + "CryptoMessenger";
+    String path = Environment.getExternalStorageDirectory() + File.separator + "NewStego";
 
     File folder = new File(path);
     File file = null;
@@ -266,12 +266,12 @@ class EncryptPresenterImpl implements EncryptPresenter, EncryptInteractorImpl.En
 
     if (!folder.exists()) {
       if (folder.mkdirs()) {
-        file = new File(path, "SI_" + System.currentTimeMillis() + ".png");
+        file = new File(path, "Embed_" + System.currentTimeMillis() + ".png");
       } else {
         showParsingImageError();
       }
     } else {
-      file = new File(path, "SI_" + System.currentTimeMillis() + ".png");
+      file = new File(path, "Embed_" + System.currentTimeMillis() + ".png");
     }
 
     if (file != null) {
